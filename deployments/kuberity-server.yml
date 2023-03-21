@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kuberity-server
+  labels:
+    app: kuberity-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kuberity-server
+  template:
+    metadata:
+      labels:
+        app: kuberity-server
+    spec:
+      serviceAccountName: kuberity-controller
+      containers:
+        - name: kuberity-server
+          image: hidetran/kuberity:v0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3119
